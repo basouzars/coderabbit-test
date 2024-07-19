@@ -31,7 +31,7 @@ export const deleteUser = (req: Request, res: Response) => {
   const user = users.find(user => user.id === parseInt(id));
 
   if (user) {
-    users = users.filter(u => u.id != parseInt(id));
+    users = users.filter(u => u.id != Number.parseInt(id));
     res.status(200).json({ message: 'User deleted' });
   } else {
     res.status(404).json({ message: 'User not found' });
