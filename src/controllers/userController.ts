@@ -15,12 +15,25 @@ export const createUser = (req: Request, res: Response) => {
 export const updateUser = (req: Request, res: Response) => {
   const { id } = req.params;
   const updatedData = req.body;
-  const userIndex = users.findIndex(user => user.id === Number.parseInt(id));
+  let user = users.find(user => user.id === parseInt(id));
 
-  if (userIndex !== -1) {
-    users[userIndex] = { ...users[userIndex], ...updatedData };
-    res.json(users[userIndex]);
+  if (user) {
+    user = { ...user, ...updatedData, id: user.id };
+    users = users.map(u => (u.id === parseInt(id) ? user : u));
+    res.json(user);
   } else {
     res.status(404).json({ message: 'User not found' });
+  }
+};
+
+export const deleteUser = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = users.find(user => user.id === parseInt(id));
+
+  if (user) {
+    users = users.filter(u => u.id != parseInt(id));
+    res.status(200).json({ message: 'User deleted' });
+  } else {
+    res.status(200).json({ message: 'User not found' });
   }
 };
