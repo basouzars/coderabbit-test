@@ -19,7 +19,7 @@ export const updateUser = (req: Request, res: Response) => {
 
   if (user) {
     user = { ...user, ...updatedData, id: user.id };
-    users = users.map(u => (u.id === parseInt(id) ? user : u));
+    users = users.map(u => (u.id === Number.parseInt(id) ? user : u));
     res.json(user);
   } else {
     res.status(404).json({ message: 'User not found' });
