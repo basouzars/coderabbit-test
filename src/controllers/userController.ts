@@ -34,6 +34,6 @@ export const deleteUser = (req: Request, res: Response) => {
     users = users.filter(u => u.id != parseInt(id));
     res.status(200).json({ message: 'User deleted' });
   } else {
-    res.status(200).json({ message: 'User not found' });
+    res.status(404).json({ message: 'User not found' });
   }
 };
