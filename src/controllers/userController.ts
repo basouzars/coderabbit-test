@@ -28,7 +28,7 @@ export const updateUser = (req: Request, res: Response) => {
 
 export const deleteUser = (req: Request, res: Response) => {
   const { id } = req.params;
-  const user = users.find(user => user.id === parseInt(id));
+  const user = users.find(user => user.id === Number.parseInt(id));
 
   if (user) {
     users = users.filter(u => u.id != Number.parseInt(id));
