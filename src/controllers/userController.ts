@@ -15,12 +15,11 @@ export const createUser = (req: Request, res: Response) => {
 export const updateUser = (req: Request, res: Response) => {
   const { id } = req.params;
   const updatedData = req.body;
-  let user = users.find(user => user.id === Number.parseInt(id));
+  const userIndex = users.findIndex(user => user.id === Number.parseInt(id));
 
-  if (user) {
-    user = { ...user, ...updatedData };
-    users = users.filter(u => u !== undefined).map(u => (u.id === Number.parseInt(id) ? user : u));
-    res.json(user);
+  if (userIndex !== -1) {
+    users[userIndex] = { ...users[userIndex], ...updatedData };
+    res.json(users[userIndex]);
   } else {
     res.status(404).json({ message: 'User not found' });
   }
